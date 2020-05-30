@@ -15,6 +15,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import { AddContractorComponent } from './add-contractor/add-contractor.component';
+import { ContractorListComponent } from './contractor-list/contractor-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MatTableModule} from '@angular/material/table';
     RegisterComponent,
     EventsComponent,
     SpecialEventsComponent,
-    InvoiceListComponent
+    InvoiceListComponent,
+    AddContractorComponent,
+    ContractorListComponent
   ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule],
   providers: [

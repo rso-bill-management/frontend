@@ -7,7 +7,15 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   title = 'ngApp';
+
+  loggedIn(): boolean {
+    return this.authService.loggedIn();
+  }
+
+  logoutUser(): void {
+    this.authService.logoutUser();
+  }
 }

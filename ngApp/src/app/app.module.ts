@@ -15,6 +15,8 @@ import {TokenInterceptorService} from './token-interceptor.service';
 import {InvoiceListComponent} from './invoice-list/invoice-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import { AddContractorComponent } from './add-contractor/add-contractor.component';
+import { ContractorListComponent } from './contractor-list/contractor-list.component';
 import {InvoiceAddComponent} from './invoice-add/invoice-add.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -30,6 +32,9 @@ import {MatCardModule} from '@angular/material/card';
     EventsComponent,
     SpecialEventsComponent,
     InvoiceListComponent,
+    AddContractorComponent,
+    ContractorListComponent,
+    InvoiceListComponent,
     InvoiceAddComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatCardModule],
@@ -44,5 +49,4 @@ import {MatCardModule} from '@angular/material/card';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,172 +1,240 @@
 <div class="mt-3">
-  <mat-card>
-    <mat-card-title> Basic</mat-card-title>
-    <mat-card-content>
+  <form [formGroup]="formModel" (ngSubmit)="onSubmit($event)">
+    <mat-card>
+      <mat-card-title> Basic</mat-card-title>
+      <mat-card-content>
 
-      <div class="row">
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Invoice number</mat-label>
-            <input matInput placeholder="DD/MM/YYYY" value="">
-          </mat-form-field>
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="w-100">
+              <mat-label>Invoice number</mat-label>
+              <input matInput placeholder="DD/MM/YYYY" formControlName="number">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="w-100">
+              <mat-label>Issue date</mat-label>
+              <input matInput [matDatepicker]="datePickerIssue" formControlName="dateIssue">
+              <mat-datepicker-toggle matSuffix [for]="datePickerIssue"></mat-datepicker-toggle>
+              <mat-datepicker #datePickerIssue></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="w-100">
+              <mat-label>Issue place</mat-label>
+              <input matInput placeholder="Town" formControlName="placeIssue">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="w-100">
+              <mat-label>Sale date</mat-label>
+              <input matInput [matDatepicker]="datePickerSale" formControlName="saleDate">
+              <mat-datepicker-toggle matSuffix [for]="datePickerSale"></mat-datepicker-toggle>
+              <mat-datepicker #datePickerSale></mat-datepicker>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Issue date</mat-label>
-            <input matInput [matDatepicker]="datePickerIssue">
-            <mat-datepicker-toggle matSuffix [for]="datePickerIssue"></mat-datepicker-toggle>
-            <mat-datepicker #datePickerIssue></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Issue place</mat-label>
-            <input matInput placeholder="Town" value="">
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Sale date</mat-label>
-            <input matInput [matDatepicker]="datePickerSale">
-            <mat-datepicker-toggle matSuffix [for]="datePickerSale"></mat-datepicker-toggle>
-            <mat-datepicker #datePickerSale></mat-datepicker>
-          </mat-form-field>
-        </div>
+      </mat-card-content>
+    </mat-card>
+    <!-- SELLER + CONTRACTOR -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <mat-card class="h-100">
+          <mat-card-title>Seller</mat-card-title>
+          <mat-card-content>
+            <strong>Daniel Bigos Usługi IT</strong><br/>
+            <span>20 2020 20020 2222 2222 2222 PEKAO SA</span><br/>
+            <span>3-maja 30/40</span><br/>
+            <span class="mr-1">09-122</span> <span>Radom</span><br/>
+          </mat-card-content>
+        </mat-card>
       </div>
-    </mat-card-content>
-  </mat-card>
-  <!-- SELLER + CONTRACTOR -->
-  <div class="row mt-4">
-    <div class="col-md-6">
-      <mat-card class="h-100">
-        <mat-card-title>Seller</mat-card-title>
-        <mat-card-content>
-          <strong>Daniel Bigos Usługi IT</strong><br/>
-          <span>20 2020 20020 2222 2222 2222 PEKAO SA</span><br/>
-          <span>3-maja 30/40</span><br/>
-          <span class="mr-1">09-122</span> <span>Radom</span><br/>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="col-md-6">
-      <mat-card class="h-100">
-        <mat-card-title>Contractor</mat-card-title>
-        <mat-card-content>
-          <div class="row col">
-            <mat-form-field class="w-100">
-              <mat-label>Name</mat-label>
-              <input matInput value="">
-            </mat-form-field>
-          </div>
-          <div class="row col">
-            <mat-form-field class="w-100">
-              <mat-label>Tax number</mat-label>
-              <input matInput value="">
-            </mat-form-field>
-          </div>
-          <div class="row col">
-            <mat-form-field class="w-100">
-              <mat-label>Street</mat-label>
-              <input matInput value="">
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="w-100">
-                <mat-label>Zip code</mat-label>
-                <input matInput value="">
+      <div class="col-md-6 mt-md-0 mt-2" formGroupName="contractor">
+        <mat-card class="h-100">
+          <mat-card-title>Contractor</mat-card-title>
+          <mat-card-content>
+            <div class="row">
+              <mat-form-field class="col-12 w-100">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
               </mat-form-field>
             </div>
-            <div class="col">
-              <mat-form-field class="w-100">
-                <mat-label>Town</mat-label>
-                <input matInput value="">
+            <div class="row">
+              <mat-form-field class="col-12 w-100">
+                <mat-label>Tax number</mat-label>
+                <input matInput formControlName="taxpayerIdentificationNumber">
               </mat-form-field>
             </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+            <div class="row">
+              <mat-form-field class="col-12 w-100">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street">
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="w-100">
+                  <mat-label>Zip code</mat-label>
+                  <input matInput formControlName="postalCode">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="w-100">
+                  <mat-label>Town</mat-label>
+                  <input matInput formControlName="town">
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
-  </div>
-  <!-- INVOICE ITEMS -->
-  <div class="row mt-4">
-    <div class="col">
-      <mat-card class="w-100">
-        <mat-card-title>
-          Invoice items
-        </mat-card-title>
-      </mat-card>
-    </div>
-  </div>
-  <!-- SUMMARY -->
-  <div class="row mt-4">
-    <div class="col">
-      <mat-card class="w-100">
-        <mat-card-title>Summary</mat-card-title>
-        <mat-card-content>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field>
-                    <mat-label>Payment type</mat-label>
-                    <mat-select>
-                      <mat-option>Transfer</mat-option>
-                      <!--              <mat-option *ngFor="let food of foods" [value]="food.value">
-                                      {{food.viewValue}}
-                                    </mat-option>-->
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field>
-                    <mat-label>Payment time</mat-label>
-                    <input type="number" matInput min="0" placeholder="14">
-                    <span matSuffix>days</span>
-                  </mat-form-field>
+    <!-- INVOICE ITEMS -->
+    <div class="row mt-4">
+      <div class="col">
+        <mat-card class="w-100">
+          <mat-card-title>
+            <div class="row">
+              <div class="col">
+                Invoice items
+              </div>
+              <div class="col text-right">
+                <button type="button" mat-mini-fab color="primary" aria-label="Add" (click)="addNewPosition()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card-title>
+          <mat-card-content formArrayName="positions">
+            <div class="row" *ngFor="let _ of positions.controls; index as i" [formGroupName]="i">
+              <div class="col-md-5">
+                <mat-form-field class="w-100">
+                  <mat-label>Title</mat-label>
+                  <input matInput formControlName="title">
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 px-2">
+                <mat-form-field class="w-100">
+                  <mat-label>Count</mat-label>
+                  <input matInput formControlName="count" class="text-right" min="0">
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 px-2">
+                <mat-form-field class="w-100">
+                  <mat-label>Unit</mat-label>
+                  <input matInput formControlName="unit" class="text-right" value="">
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 px-2">
+                <mat-form-field class="w-100">
+                  <mat-label>Net price</mat-label>
+                  <input matInput class="text-right" formControlName="netPrice">
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 px-2">
+                <mat-form-field class="w-100">
+                  <mat-label>Vat</mat-label>
+                  <input matInput type="number" min="0" max="100" class="text-right" formControlName="vat">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 px-2">
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>VAT Amount</mat-label>
+                      <input matInput [value]="calcVatAmountForPos(i)" class="text-right" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Gross amount</mat-label>
+                      <input matInput class="text-right" [value]="calcGrossAmountForPos(i)" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="w-100 py-1" mat-button color="warn" type="button" aria-label=""
+                            (click)="removePosition(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <mat-list>
-                <mat-list-item>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <!-- SUMMARY -->
+    <div class="row mt-4">
+      <div class="col">
+        <mat-card class="w-100">
+          <mat-card-title>Summary</mat-card-title>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
                   <div class="col-md-6">
-                    Sum of net
+                    <mat-form-field class="w-100">
+                      <mat-label>Payment type</mat-label>
+                      <mat-select formControlName="paymentType">
+                        <mat-option value="TRANSFER">Transfer</mat-option>
+                        <mat-option value="CASH">Cash</mat-option>
+                        <!--              <mat-option *ngFor="let food of foods" [value]="food.value">
+                                        {{food.viewValue}}
+                                      </mat-option>-->
+                      </mat-select>
+                    </mat-form-field>
                   </div>
-                  <div class="col-md-6 text-right">
-                    30.00 PLN
-                  </div>
-                </mat-list-item>
-                <mat-divider [inset]="true"></mat-divider>
-                <mat-list-item>
                   <div class="col-md-6">
-                    Sum of VAT
+                    <mat-form-field class="w-100">
+                      <mat-label>Payment time</mat-label>
+                      <input type="number" matInput min="0" placeholder="14" formControlName="paymentDays">
+                      <span matSuffix>days</span>
+                    </mat-form-field>
                   </div>
-                  <div class="col-md-6 text-right">
-                    30.00 PLN
-                  </div>
-                </mat-list-item>
-                <mat-divider [inset]="true"></mat-divider>
-                <mat-list-item>
-                  <div class="col-md-6">
-                    Sum of gross
-                  </div>
-                  <div class="col-md-6 text-right">
-                    30.00 PLN
-                  </div>
-                </mat-list-item>
-              </mat-list>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    <div class="col-md-6">
+                      Sum of net
+                    </div>
+                    <div class="col-md-6 text-right">
+                      {{calcSumNet()}} PLN
+                    </div>
+                  </mat-list-item>
+                  <mat-divider [inset]="true"></mat-divider>
+                  <mat-list-item>
+                    <div class="col-md-6">
+                      Sum of VAT
+                    </div>
+                    <div class="col-md-6 text-right">
+                      {{calcSumVat() }} PLN
+                    </div>
+                  </mat-list-item>
+                  <mat-divider [inset]="true"></mat-divider>
+                  <mat-list-item>
+                    <div class="col-md-6">
+                      Sum of gross
+                    </div>
+                    <div class="col-md-6 text-right">
+                      {{calcSumGross()}} PLN
+                    </div>
+                  </mat-list-item>
+                </mat-list>
+              </div>
             </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-  </div>
-  <div class="row mt-4">
-    <div class="col text-right">
-      <button class="mr-4" mat-raised-button color="secondary">Clear</button>
-      <button mat-raised-button color="primary">Generate invoice</button>
     </div>
-  </div>
+    <div class="row mt-4">
+      <div class="col text-right">
+        <button class="mr-4" mat-raised-button color="secondary" type="button" (click)="clear()">Clear</button>
+        <button mat-raised-button color="primary" type="submit">Generate invoice</button>
+      </div>
+    </div>
+  </form>
 </div>

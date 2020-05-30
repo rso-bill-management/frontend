@@ -12,6 +12,9 @@ import { SpecialEventsComponent } from './special-events/special-events.componen
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -19,9 +22,10 @@ import { TokenInterceptorService } from './token-interceptor.service';
     LoginComponent,
     RegisterComponent,
     EventsComponent,
-    SpecialEventsComponent
+    SpecialEventsComponent,
+    InvoiceListComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule],
   providers: [
     AuthService,
     AuthGuard,

@@ -1,0 +1,55 @@
+<div class="mt-3">
+  <mat-card>
+    <mat-card-title> Basic</mat-card-title>
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Invoice number</mat-label>
+            <input matInput placeholder="DD/MM/YYYY" value="">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Issue date</mat-label>
+            <input matInput [matDatepicker]="datePickerIssue">
+            <mat-datepicker-toggle matSuffix [for]="datePickerIssue"></mat-datepicker-toggle>
+            <mat-datepicker #datePickerIssue></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Issue place</mat-label>
+            <input matInput placeholder="City" value="">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Sale date</mat-label>
+            <input matInput [matDatepicker]="datePickerSale">
+            <mat-datepicker-toggle matSuffix [for]="datePickerSale"></mat-datepicker-toggle>
+            <mat-datepicker #datePickerSale></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="row mt-4">
+    <div class="col">
+      <mat-card>
+        <mat-card-title>Seller</mat-card-title>
+        <mat-card-content>
+          <strong>Daniel Bigos Usługi IT</strong>
+          <strong>Tax number</strong>
+          <strong>Account number</strong>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col">
+      <mat-card>
+        <mat-card-title>Contractor</mat-card-title>
+      </mat-card>
+    </div>
+  </div>
+</div>

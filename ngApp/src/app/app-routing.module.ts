@@ -5,9 +5,10 @@ import { SpecialEventsComponent } from './special-events/special-events.componen
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
-import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { AddContractorComponent } from './add-contractor/add-contractor.component';
 import { ContractorListComponent } from './contractor-list/contractor-list.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { InvoiceAddComponent } from './invoice-add/invoice-add.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,11 @@ const routes: Routes = [
   },
   {
     path: 'allcontractors',
-    component: ContractorListComponent,
+    component: ContractorListComponent
+  },
+  {
+    path: 'invoice-add',
+    component: InvoiceAddComponent,
     canActivate: [AuthGuard]
   }
 ];

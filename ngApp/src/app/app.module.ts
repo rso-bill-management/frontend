@@ -14,9 +14,15 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { AddContractorComponent } from './add-contractor/add-contractor.component';
 import { ContractorListComponent } from './contractor-list/contractor-list.component';
+import { InvoiceAddComponent } from './invoice-add/invoice-add.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -27,9 +33,22 @@ import { ContractorListComponent } from './contractor-list/contractor-list.compo
     SpecialEventsComponent,
     InvoiceListComponent,
     AddContractorComponent,
-    ContractorListComponent
+    ContractorListComponent,
+    InvoiceAddComponent
   ],
-    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
+  ],
   providers: [
     AuthService,
     AuthGuard,

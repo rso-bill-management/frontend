@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import {InvoiceListComponent} from './invoice-list/invoice-list.component';
+import {InvoiceAddComponent} from './invoice-add/invoice-add.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,11 @@ const routes: Routes = [
   {
     path: 'invoice-list',
     component: InvoiceListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'invoice-add',
+    component: InvoiceAddComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -21,7 +21,7 @@
         <div class="col">
           <mat-form-field>
             <mat-label>Issue place</mat-label>
-            <input matInput placeholder="City" value="">
+            <input matInput placeholder="Town" value="">
           </mat-form-field>
         </div>
         <div class="col">
@@ -35,21 +35,138 @@
       </div>
     </mat-card-content>
   </mat-card>
+  <!-- SELLER + CONTRACTOR -->
   <div class="row mt-4">
-    <div class="col">
-      <mat-card>
+    <div class="col-md-6">
+      <mat-card class="h-100">
         <mat-card-title>Seller</mat-card-title>
         <mat-card-content>
-          <strong>Daniel Bigos Usługi IT</strong>
-          <strong>Tax number</strong>
-          <strong>Account number</strong>
+          <strong>Daniel Bigos Usługi IT</strong><br/>
+          <span>20 2020 20020 2222 2222 2222 PEKAO SA</span><br/>
+          <span>3-maja 30/40</span><br/>
+          <span class="mr-1">09-122</span> <span>Radom</span><br/>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col">
-      <mat-card>
+    <div class="col-md-6">
+      <mat-card class="h-100">
         <mat-card-title>Contractor</mat-card-title>
+        <mat-card-content>
+          <div class="row col">
+            <mat-form-field class="w-100">
+              <mat-label>Name</mat-label>
+              <input matInput value="">
+            </mat-form-field>
+          </div>
+          <div class="row col">
+            <mat-form-field class="w-100">
+              <mat-label>Tax number</mat-label>
+              <input matInput value="">
+            </mat-form-field>
+          </div>
+          <div class="row col">
+            <mat-form-field class="w-100">
+              <mat-label>Street</mat-label>
+              <input matInput value="">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="w-100">
+                <mat-label>Zip code</mat-label>
+                <input matInput value="">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="w-100">
+                <mat-label>Town</mat-label>
+                <input matInput value="">
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
       </mat-card>
+    </div>
+  </div>
+  <!-- INVOICE ITEMS -->
+  <div class="row mt-4">
+    <div class="col">
+      <mat-card class="w-100">
+        <mat-card-title>
+          Invoice items
+        </mat-card-title>
+      </mat-card>
+    </div>
+  </div>
+  <!-- SUMMARY -->
+  <div class="row mt-4">
+    <div class="col">
+      <mat-card class="w-100">
+        <mat-card-title>Summary</mat-card-title>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Payment type</mat-label>
+                    <mat-select>
+                      <mat-option>Transfer</mat-option>
+                      <!--              <mat-option *ngFor="let food of foods" [value]="food.value">
+                                      {{food.viewValue}}
+                                    </mat-option>-->
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Payment time</mat-label>
+                    <input type="number" matInput min="0" placeholder="14">
+                    <span matSuffix>days</span>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <mat-list>
+                <mat-list-item>
+                  <div class="col-md-6">
+                    Sum of net
+                  </div>
+                  <div class="col-md-6 text-right">
+                    30.00 PLN
+                  </div>
+                </mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item>
+                  <div class="col-md-6">
+                    Sum of VAT
+                  </div>
+                  <div class="col-md-6 text-right">
+                    30.00 PLN
+                  </div>
+                </mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item>
+                  <div class="col-md-6">
+                    Sum of gross
+                  </div>
+                  <div class="col-md-6 text-right">
+                    30.00 PLN
+                  </div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+  <div class="row mt-4">
+    <div class="col text-right">
+      <button class="mr-4" mat-raised-button color="secondary">Clear</button>
+      <button mat-raised-button color="primary">Generate invoice</button>
     </div>
   </div>
 </div>

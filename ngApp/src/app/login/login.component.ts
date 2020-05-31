@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginSuccess(response): void {
-    this.router.navigate(['/special']);
+    this.router.navigate(['/invoice-add']);
     localStorage.setItem('token', response.token);
   }
 

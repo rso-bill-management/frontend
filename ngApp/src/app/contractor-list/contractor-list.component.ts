@@ -25,66 +25,68 @@ export class ContractorListComponent implements OnInit {
     private router: Router,
     private matDialog: MatDialog,
     private contractorService: ContractorService
-  ) {}
+  ) {
+    this.searchKey = '';
+  }
 
-  contractors: Contractor[] = [
-    {
-      id: '1',
-      name: 'Piotr',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Karkow',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    },
-    {
-      id: '2',
-      name: 'Tomek',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Warszawa',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    },
-    {
-      id: '3',
-      name: 'Daniel',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Warszawa',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    },
-    {
-      id: '4',
-      name: 'Marek',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Warszawa',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    },
-    {
-      id: '5',
-      name: 'Arek',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Warszawa',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    },
-    {
-      id: '6',
-      name: 'Jarek',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Warszawa',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    },
-    {
-      id: '7',
-      name: 'Jacek',
-      taxpayerIdentificationNumber: '123213123123',
-      town: 'Warszawa',
-      street: 'warynskiego 12',
-      postalCode: '00-631'
-    }
-  ];
+  contractors: Contractor[] = [];
+  //   {
+  //     id: '1',
+  //     name: 'Piotr',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Karkow',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   },
+  //   {
+  //     id: '2',
+  //     name: 'Tomek',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Warszawa',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   },
+  //   {
+  //     id: '3',
+  //     name: 'Daniel',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Warszawa',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   },
+  //   {
+  //     id: '4',
+  //     name: 'Marek',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Warszawa',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   },
+  //   {
+  //     id: '5',
+  //     name: 'Arek',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Warszawa',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   },
+  //   {
+  //     id: '6',
+  //     name: 'Jarek',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Warszawa',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   },
+  //   {
+  //     id: '7',
+  //     name: 'Jacek',
+  //     taxpayerIdentificationNumber: '123213123123',
+  //     town: 'Warszawa',
+  //     street: 'warynskiego 12',
+  //     postalCode: '00-631'
+  //   }
+  // ];
 
   displayedColumns = [
     'name',
@@ -104,7 +106,6 @@ export class ContractorListComponent implements OnInit {
     this.contractorService.getContractorList().subscribe(
       response => {
         this.contractors = response;
-        this.searchKey = '';
         this.listData = new MatTableDataSource(this.contractors);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;

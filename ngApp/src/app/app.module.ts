@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EventsComponent } from './events/events.component';
-import { SpecialEventsComponent } from './special-events/special-events.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
@@ -37,7 +36,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     LoginComponent,
     RegisterComponent,
     EventsComponent,
-    SpecialEventsComponent,
     InvoiceListComponent,
     ContractorListComponent,
     InvoiceAddComponent,

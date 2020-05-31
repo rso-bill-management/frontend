@@ -68,6 +68,8 @@ contractors = [
   }
 ];
 
+contractors = [];
+
 app.get("/", function(req, res) {
   res.status(401).send("not authorized");
 });

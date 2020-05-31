@@ -25,7 +25,25 @@
         <a
           class="nav-link"
           *ngIf="loggedIn()"
-          routerLink="/addcontractor"
+          routerLink="/invoice-add"
+          routerLinkActive="active"
+          >Issue an Invoice</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          *ngIf="loggedIn()"
+          routerLink="/invoice-list"
+          routerLinkActive="active"
+          >Invoice List</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          *ngIf="loggedIn()"
+          routerLink="/contractor-add"
           routerLinkActive="active"
           >Add Contractor</a
         >
@@ -34,9 +52,9 @@
         <a
           class="nav-link"
           *ngIf="loggedIn()"
-          routerLink="/allcontractors"
+          routerLink="/contractor-list"
           routerLinkActive="active"
-          >All Contractors</a
+          >Contractor List</a
         >
       </li>
     </ul>

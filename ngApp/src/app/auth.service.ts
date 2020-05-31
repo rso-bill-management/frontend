@@ -27,7 +27,7 @@ export class AuthService {
     this.router.navigate(['/events']);
   }
 
-  getToken(): String {
+  getToken(): string {
     return localStorage.getItem('token');
   }
 }

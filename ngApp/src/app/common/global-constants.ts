@@ -4,4 +4,6 @@ export class GlobalConstants {
   public static apiURLLogin: string = 'http://localhost:1234/login';
   public static apiURLEvents: string = 'http://localhost:1234/events';
   public static apiURLSpecial: string = 'http://localhost:1234/special';
+  public static apiURLAddOrUpdateContractor: string =
+    'http://localhost:1234/upsert-contractor';
 }

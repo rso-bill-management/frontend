@@ -14,8 +14,7 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
-import { AddContractorComponent } from './add-contractor/add-contractor.component';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { ContractorListComponent } from './contractor-list/contractor-list.component';
 import { InvoiceAddComponent } from './invoice-add/invoice-add.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +22,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { ContractorAddComponent } from './contractor-add/contractor-add.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ContractorService } from './contractor.service';
 
 @NgModule({
   declarations: [
@@ -32,9 +38,9 @@ import { MatCardModule } from '@angular/material/card';
     EventsComponent,
     SpecialEventsComponent,
     InvoiceListComponent,
-    AddContractorComponent,
     ContractorListComponent,
-    InvoiceAddComponent
+    InvoiceAddComponent,
+    ContractorAddComponent
   ],
   imports: [
     BrowserModule,
@@ -42,22 +48,30 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTableModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
     AuthGuard,
+    ContractorService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ContractorAddComponent]
 })
 export class AppModule {}

@@ -10,6 +10,10 @@ import { GlobalConstants } from './common/global-constants';
 export class ContractorService {
   constructor(public httpClient: HttpClient) {}
 
+  getContractorList(): Observable<any> {
+    return this.httpClient.get<any>(GlobalConstants.apiURLGetContractorList);
+  }
+
   upsertContractor(contractor: Contractor): Observable<any> {
     return this.httpClient.post<any>(
       GlobalConstants.apiURLUpsertContractor,

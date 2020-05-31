@@ -12,6 +12,8 @@ import { ContractorAddComponent } from '../contractor-add/contractor-add.compone
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ConfirmDialog } from 'src/model/confirm-dialog.model';
 import { ContractorService } from '../contractor.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contractor-list',
@@ -20,6 +22,7 @@ import { ContractorService } from '../contractor.service';
 })
 export class ContractorListComponent implements OnInit {
   constructor(
+    private router: Router,
     private matDialog: MatDialog,
     private contractorService: ContractorService
   ) {}
@@ -98,10 +101,22 @@ export class ContractorListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
-    this.searchKey = '';
-    this.listData = new MatTableDataSource(this.contractors);
-    this.listData.sort = this.sort;
-    this.listData.paginator = this.paginator;
+    this.contractorService.getContractorList().subscribe(
+      response => {
+        this.contractors = response;
+        this.searchKey = '';
+        this.listData = new MatTableDataSource(this.contractors);
+        this.listData.sort = this.sort;
+        this.listData.paginator = this.paginator;
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+        }
+      }
+    );
   }
 
   onSearchClear(): void {

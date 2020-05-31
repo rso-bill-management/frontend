@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {InvoiceModel} from '../../model/invoice.model';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {InvoiceListDatasource} from './invoice-list.datasource';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-invoice-list',
@@ -6,10 +11,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice-list.component.scss']
 })
 export class InvoiceListComponent implements OnInit {
+  displayedColumns: string[] = ['number', 'dateIssue', 'placeIssue', 'netPriceSum', 'grossSum', 'openInvoice'];
+  public dataSource = new MatTableDataSource<InvoiceModel>([]);
+  private invoiceRemoteDataSource = new InvoiceListDatasource();
 
-  constructor() { }
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.invoiceRemoteDataSource.getInvoices().subscribe((d) => {
+      this.dataSource.data = d;
+    }).unsubscribe();
   }
 
 }

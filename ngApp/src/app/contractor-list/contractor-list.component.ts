@@ -9,6 +9,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ContractorAddComponent } from '../contractor-add/contractor-add.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialog } from 'src/model/confirm-dialog.model';
+import { ContractorService } from '../contractor.service';
 
 @Component({
   selector: 'app-contractor-list',
@@ -16,7 +19,10 @@ import { ContractorAddComponent } from '../contractor-add/contractor-add.compone
   styleUrls: ['./contractor-list.component.css']
 })
 export class ContractorListComponent implements OnInit {
-  constructor(private matDialog: MatDialog) {}
+  constructor(
+    private matDialog: MatDialog,
+    private contractorService: ContractorService
+  ) {}
 
   contractors: Contractor[] = [
     {
@@ -107,23 +113,7 @@ export class ContractorListComponent implements OnInit {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
-  onCreate(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '40%';
-    const dialogReference = this.matDialog.open(
-      ContractorAddComponent,
-      dialogConfig
-    );
-    dialogReference.afterClosed().subscribe(contractor => {
-      if (contractor) {
-        this.upsertContractor(contractor);
-      }
-    });
-  }
-
-  onEdit(row): void {
+  onUpsertContractor(row): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -140,6 +130,28 @@ export class ContractorListComponent implements OnInit {
     });
   }
 
+  onRemoveContractor(contractor): void {
+    const dialogConfigData: ConfirmDialog = {
+      title: 'Remove Contractor',
+      message: 'Are you sure to remove this Contractor?'
+    };
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '20%';
+    dialogConfig.data = dialogConfigData;
+    const dialogReference = this.matDialog.open(
+      ConfirmDialogComponent,
+      dialogConfig
+    );
+    dialogReference.afterClosed().subscribe(result => {
+      if (result) {
+        this.removeContractor(contractor);
+      }
+    });
+  }
+
   upsertContractor(contractor): void {
     const index = this.contractors.findIndex(x => x.id === contractor.id);
 
@@ -150,5 +162,16 @@ export class ContractorListComponent implements OnInit {
     }
 
     this.listData.data = this.contractors;
+  }
+
+  removeContractor(contractor: Contractor): void {
+    this.contractorService.removeContractor(contractor).subscribe(
+      response => {
+        const index = this.contractors.findIndex(x => x.id === response.id);
+        this.contractors.splice(index, 1);
+        this.listData.data = this.contractors;
+      },
+      error => {}
+    );
   }
 }

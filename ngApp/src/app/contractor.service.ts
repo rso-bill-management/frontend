@@ -8,14 +8,19 @@ import { GlobalConstants } from './common/global-constants';
   providedIn: 'root'
 })
 export class ContractorService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(public httpClient: HttpClient) {}
 
   upsertContractor(contractor: Contractor): Observable<any> {
     return this.httpClient.post<any>(
-      GlobalConstants.apiURLAddOrUpdateContractor,
+      GlobalConstants.apiURLUpsertContractor,
       contractor
     );
   }
 
-  removeContractor(): void {}
+  removeContractor(contractor: Contractor): Observable<any> {
+    return this.httpClient.post<any>(
+      GlobalConstants.apiURLRemoveContractor,
+      contractor
+    );
+  }
 }

@@ -1,5 +1,5 @@
 <div class="search-div">
-  <button mat-raised-button (click)="onCreate()">
+  <button mat-raised-button (click)="onUpsertContractor(null)">
     <mat-icon>add</mat-icon> Create
   </button>
   <mat-form-field class="search-form-field" floatLabel="never">
@@ -55,10 +55,10 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button (click)="onEdit(row)">
+        <button mat-icon-button (click)="onUpsertContractor(row)">
           <mat-icon>launch</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="onRemoveContractor(row)">
           <mat-icon color="warn">delete_outline</mat-icon>
         </button>
       </mat-cell>

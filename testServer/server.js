@@ -62,4 +62,16 @@ app.post("/upsert-contractor", function(req, res) {
   }
 });
 
+app.post("/remove-contractor", function(req, res) {
+  if (!req.headers.authorization) {
+    res.status(401).send("UNAUTHORIZED ACCESS TO SPECIAL");
+  } else {
+    const token = req.headers.authorization.split(" ")[1];
+    if (token !== JWT) {
+      res.status(401).send("UNAUTHORIZED ACCESS TO SPECIAL");
+    }
+  }
+  res.send(req.body);
+});
+
 app.listen(1234);

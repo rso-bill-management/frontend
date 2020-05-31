@@ -29,6 +29,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ContractorService } from './contractor.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ContractorService } from './contractor.service';
     InvoiceListComponent,
     ContractorListComponent,
     InvoiceAddComponent,
-    ContractorAddComponent
+    ContractorAddComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

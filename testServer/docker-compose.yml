@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  example:
+    container_name: rso-frontend-testserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '1234:1234'

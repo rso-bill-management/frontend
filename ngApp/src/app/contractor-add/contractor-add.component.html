@@ -1,0 +1,63 @@
+<div class="mt-3">
+  <mat-card>
+    <mat-card-title> Edit Contractor</mat-card-title>
+    <mat-card-content>
+      <button class="close" mat-button (click)="onClose(null)">X</button>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Tax Number</mat-label>
+            <input
+              matInput
+              placeholder="Tax Number"
+              [(ngModel)]="contractor.taxpayerIdentificationNumber"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" [(ngModel)]="contractor.name" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Town</mat-label>
+            <input matInput placeholder="Town" [(ngModel)]="contractor.town" />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Street</mat-label>
+            <input
+              matInput
+              placeholder="Street"
+              [(ngModel)]="contractor.street"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Postal Code</mat-label>
+            <input
+              matInput
+              placeholder="Postal Code"
+              [(ngModel)]="contractor.postalCode"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" (click)="onSubmit()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     this.authService.registerUser(this.registerUserData).subscribe(
       response => {
         console.log(response);
-        this.router.navigate(['/special']);
+        this.router.navigate(['/invoice-add']);
         localStorage.setItem('token', response.token);
       },
       error => console.log(error)

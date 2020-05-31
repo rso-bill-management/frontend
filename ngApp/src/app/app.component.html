@@ -13,30 +13,34 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/events" routerLinkActive="active"
-          >For everyone</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/special" routerLinkActive="active"
-          >For logged</a
+          >Main Page</a
         >
       </li>
       <li class="nav-item">
         <a
           class="nav-link"
           *ngIf="loggedIn()"
-          routerLink="/addcontractor"
+          routerLink="/invoice-add"
           routerLinkActive="active"
-          >Add Contractor</a
+          >Issue an Invoice</a
         >
       </li>
       <li class="nav-item">
         <a
           class="nav-link"
           *ngIf="loggedIn()"
-          routerLink="/allcontractors"
+          routerLink="/invoice-list"
           routerLinkActive="active"
-          >All Contractors</a
+          >Invoice List</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          *ngIf="loggedIn()"
+          routerLink="/contractor-list"
+          routerLinkActive="active"
+          >Contractor List</a
         >
       </li>
     </ul>

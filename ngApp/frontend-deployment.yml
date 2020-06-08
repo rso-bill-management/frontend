@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angularfrontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: angularfrontend
+  template:
+    metadata:
+      labels:
+        app: angularfrontend
+    spec:
+      containers:
+      - name: angularfrontend
+        image: rsoacr.azurecr.io/rso-frontend-app:v1
+        ports:
+        - containerPort: 80
+          name: frontend

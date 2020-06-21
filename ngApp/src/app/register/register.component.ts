@@ -10,21 +10,39 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerUserData = {
     username: '',
-    password: ''
+    password: '',
+    checkbox: false
   };
+
+  wrongCredentials = false;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
+  validateData() {
+    if (
+      this.registerUserData.username === '' ||
+      this.registerUserData.password === '' ||
+      this.registerUserData.checkbox === false
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   registerUser() {
-    console.log(this.registerUserData);
-    this.authService.registerUser(this.registerUserData).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['/invoice-add']);
-        localStorage.setItem('token', response.token);
-      },
-      error => console.log(error)
-    );
+    if (this.validateData()) {
+      console.log(this.registerUserData);
+      this.authService.registerUser(this.registerUserData).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/invoice-add']);
+          localStorage.setItem('token', response.token);
+        },
+        error => console.log(error)
+      );
+    } else {
+      this.wrongCredentials = true;
+    }
   }
 }

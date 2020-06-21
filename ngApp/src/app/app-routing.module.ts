@@ -12,7 +12,7 @@ import { InvoiceAddComponent } from './invoice-add/invoice-add.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/events',
+    redirectTo: '/invoice-add',
     pathMatch: 'full'
   },
   {

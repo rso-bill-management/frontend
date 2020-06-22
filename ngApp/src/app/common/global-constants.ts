@@ -10,4 +10,8 @@ export class GlobalConstants {
     environment.apiUrl + '/upsert-contractor';
   public static apiURLRemoveContractor: string =
     environment.apiUrl + '/remove-contractor';
+  public static apiURLGetSellerData: string =
+    environment.apiUrl + '/get-seller';
+  public static apiURLUpsertSeller: string =
+    environment.apiUrl + '/upsert-seller';
 }

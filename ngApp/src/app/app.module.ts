@@ -31,6 +31,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { SettingsComponent } from './settings/settings.component';
+import { SettingsInvoiceItemsComponent } from './settings-invoice-items/settings-invoice-items.component';
+import { SettingsInvoiceItemsAddComponent } from './settings-invoice-items-add/settings-invoice-items-add.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { SettingsComponent } from './settings/settings.component';
     InvoiceAddComponent,
     ContractorAddComponent,
     ConfirmDialogComponent,
-    SettingsComponent
+    SettingsComponent,
+    SettingsInvoiceItemsComponent,
+    SettingsInvoiceItemsAddComponent
   ],
   imports: [
     BrowserModule,

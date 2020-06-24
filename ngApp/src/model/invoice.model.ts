@@ -13,5 +13,5 @@ export interface InvoiceModel {
   vatSum: number; // suma vatu z pozycji
   grossSum: number; // suma brutto
   paymentType: PaymentType;
-  paymentDays: number;
+  paymentDays: string;
 }

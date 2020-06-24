@@ -3,6 +3,9 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PredefinedInvoiceModel} from '../../model/predefined-invoice.model';
 import {InvoiceService} from '../invoice.service';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {Contractor} from '../../model/contractor.model';
+import {ContractorService} from '../contractor.service';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
   selector: 'app-invoice-add',
@@ -12,6 +15,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 export class InvoiceAddComponent implements OnInit {
 
   private predefinedInvoiceItems: PredefinedInvoiceModel[];
+  public predefinedContractors: Contractor[] = [];
 
   public formModel = this.fb.group({
     dateIssue: [new Date(), Validators.required],
@@ -29,12 +33,13 @@ export class InvoiceAddComponent implements OnInit {
     paymentDays: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private iS: InvoiceService) {
+  constructor(private fb: FormBuilder, private iS: InvoiceService, private contractorService: ContractorService) {
   }
 
   ngOnInit(): void {
     this.addNewPosition();
     this.iS.listPredefinedInvoice().subscribe(e => this.predefinedInvoiceItems = e);
+    this.contractorService.getContractorList().subscribe(e => this.predefinedContractors = e.body || []);
   }
 
   public addNewPosition() {
@@ -120,5 +125,13 @@ export class InvoiceAddComponent implements OnInit {
           netPrice: selected.unitNettoPrice,
           vat: selected.vat,
         }, {onlySelf: true});
+  }
+
+  onSelectPredefinedContractor($event) {
+    const selectedContractor = $event.value as Contractor;
+    this.formModel.get('contractor').patchValue({
+      ...selectedContractor,
+      taxpayerIdentificationNumber: selectedContractor.tin,
+    }, {onlySelf: true});
   }
 }

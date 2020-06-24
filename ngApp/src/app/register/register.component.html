@@ -10,6 +10,26 @@
         <div class="card-body">
           <form class="form">
             <div class="form-group">
+              <label for="">Name</label>
+              <input
+                [(ngModel)]="registerUserData.name"
+                name="name"
+                type="text"
+                class="form-control rounded-0"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Surname</label>
+              <input
+                [(ngModel)]="registerUserData.surname"
+                name="surname"
+                type="text"
+                class="form-control rounded-0"
+                required
+              />
+            </div>
+            <div class="form-group">
               <label for="">Username</label>
               <input
                 [(ngModel)]="registerUserData.username"
@@ -25,6 +45,7 @@
                 [(ngModel)]="registerUserData.password"
                 name="password"
                 type="password"
+                minlength="6"
                 class="form-control rounded-0"
                 required
               />

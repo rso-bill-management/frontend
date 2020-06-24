@@ -11,6 +11,8 @@ export class RegisterComponent implements OnInit {
   registerUserData = {
     username: '',
     password: '',
+    name: '',
+    surname: '',
     checkbox: false
   };
 
@@ -23,6 +25,8 @@ export class RegisterComponent implements OnInit {
     if (
       this.registerUserData.username === '' ||
       this.registerUserData.password === '' ||
+      this.registerUserData.name === '' ||
+      this.registerUserData.surname === '' ||
       this.registerUserData.checkbox === false
     ) {
       return false;
@@ -31,8 +35,9 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
+    this.registerUserData.name = this.registerUserData.name.charAt(0).toUpperCase() + this.registerUserData.name.slice(1);
+    this.registerUserData.surname = this.registerUserData.surname.charAt(0).toUpperCase() + this.registerUserData.surname.slice(1);
     if (this.validateData()) {
-      console.log(this.registerUserData);
       this.authService.registerUser(this.registerUserData).subscribe(
         response => {
           console.log(response);

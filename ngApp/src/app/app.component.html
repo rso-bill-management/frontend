@@ -58,6 +58,13 @@
         class="nav-link"
         style="cursor:pointer"
         *ngIf="loggedIn()"
+        routerLink="/settings"
+        >Settings</a
+      >
+      <a
+        class="nav-link"
+        style="cursor:pointer"
+        *ngIf="loggedIn()"
         routerLink="/register"
         (click)="logoutUser()"
         >Logout</a

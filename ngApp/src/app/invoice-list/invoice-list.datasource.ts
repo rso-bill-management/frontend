@@ -1,7 +1,12 @@
 import {Observable, of} from 'rxjs';
 import {InvoiceModel} from '../../model/invoice.model';
+import {InvoiceService} from '../invoice.service';
 
 export class InvoiceListDatasource {
+  constructor(private invoiceService: InvoiceService) {
+
+  }
+
   private invoicesSource: Observable<InvoiceModel[]> = of([
     {
       number: '10/10/2020',
@@ -19,7 +24,7 @@ export class InvoiceListDatasource {
     } as InvoiceModel]);
 
   getInvoices() {
-    return this.invoicesSource;
+    return this.invoiceService.getInvoicesList();
   }
 
 }

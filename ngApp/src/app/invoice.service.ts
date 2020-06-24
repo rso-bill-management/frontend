@@ -14,7 +14,7 @@ export class InvoiceService {
   }
 
   getInvoicesList(): Observable<InvoiceModel[]> {
-    return this.httpClient.get<any>(GlobalConstants.apiURLGetContractorList);
+    return this.httpClient.get<InvoiceModel[]>(GlobalConstants.apiURLGetInvoicesList);
   }
 
   upsertInvoice(contractor: Contractor): Observable<any> {

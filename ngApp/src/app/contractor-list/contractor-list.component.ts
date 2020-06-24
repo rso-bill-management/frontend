@@ -50,7 +50,7 @@ export class ContractorListComponent implements OnInit {
       response => {
         localStorage.setItem('token', response.headers.get('authorization'));
 
-        this.contractors = response.body.contractors;
+        this.contractors = response.body || [];
         this.listData = new MatTableDataSource(this.contractors);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;
@@ -114,7 +114,7 @@ export class ContractorListComponent implements OnInit {
   }
 
   upsertContractor(contractor): void {
-    const index = this.contractors.findIndex(x => x.id === contractor.id);
+    const index = this.contractors.findIndex(x => x.tin === contractor.tin);
 
     if (index === -1) {
       this.contractors.push(contractor);
@@ -128,7 +128,7 @@ export class ContractorListComponent implements OnInit {
   removeContractor(contractor: Contractor): void {
     this.contractorService.removeContractor(contractor).subscribe(
       response => {
-        const index = this.contractors.findIndex(x => x.id === response.id);
+        const index = this.contractors.findIndex(x => x.tin === response.tin);
         this.contractors.splice(index, 1);
         this.listData.data = this.contractors;
       },

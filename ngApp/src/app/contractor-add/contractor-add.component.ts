@@ -15,9 +15,8 @@ export class ContractorAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public contractorData: Contractor
   ) {
     this.contractor = {
-      id: '',
       name: '',
-      taxpayerIdentificationNumber: '',
+      tin: '',
       town: '',
       street: '',
       postalCode: ''
@@ -29,10 +28,8 @@ export class ContractorAddComponent implements OnInit {
   ngOnInit(): void {
     if (this.contractorData) {
       this.contractor = {
-        id: this.contractorData.id,
         name: this.contractorData.name,
-        taxpayerIdentificationNumber: this.contractorData
-          .taxpayerIdentificationNumber,
+        tin: this.contractorData.tin,
         town: this.contractorData.town,
         street: this.contractorData.street,
         postalCode: this.contractorData.postalCode
@@ -44,7 +41,7 @@ export class ContractorAddComponent implements OnInit {
     this.contractorService
       .upsertContractor(this.contractor)
       .subscribe(
-        response => this.submitSuccess(response),
+        response => this.submitSuccess(this.contractor),
         error => this.submitError(error)
       );
   }

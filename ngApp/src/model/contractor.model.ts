@@ -1,7 +1,6 @@
 export interface Contractor {
-  id: string;
   name: string;
-  taxpayerIdentificationNumber: string;
+  tin: string;
   town: string;
   street: string;
   postalCode: string;

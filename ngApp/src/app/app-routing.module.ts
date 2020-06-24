@@ -8,11 +8,12 @@ import { ContractorListComponent } from './contractor-list/contractor-list.compo
 import { ContractorAddComponent } from './contractor-add/contractor-add.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { InvoiceAddComponent } from './invoice-add/invoice-add.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/events',
+    redirectTo: '/invoice-add',
     pathMatch: 'full'
   },
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'contractor-list',
     component: ContractorListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
     canActivate: [AuthGuard]
   }
 ];

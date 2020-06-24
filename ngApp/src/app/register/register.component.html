@@ -1,41 +1,64 @@
-<div class="row pt-5">
-  <div class="class col-md-6 mx-auto">
-    <div class="card rounded-0">
-      <div class="card-header">
-        <h3 class="mb-0">
-          Register
-        </h3>
-      </div>
-      <div class="card-body">
-        <form class="form">
-          <div class="form-group">
-            <label for="">Username</label>
-            <input
-              [(ngModel)]="registerUserData.username"
-              name="username"
-              type="text"
-              class="form-control rounded-0"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input
-              [(ngModel)]="registerUserData.password"
-              name="password"
-              type="password"
-              class="form-control rounded-0"
-              required
-            />
-          </div>
-          <button
-            (click)="registerUser()"
-            type="button"
-            class="btn btn-primary float-right"
-          >
+<div class="bg">
+  <div class="row pt-5">
+    <div class="class col-md-6 mx-auto">
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">
             Register
-          </button>
-        </form>
+          </h3>
+        </div>
+        <div class="card-body">
+          <form class="form">
+            <div class="form-group">
+              <label for="">Username</label>
+              <input
+                [(ngModel)]="registerUserData.username"
+                name="username"
+                type="text"
+                class="form-control rounded-0"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Password</label>
+              <input
+                [(ngModel)]="registerUserData.password"
+                name="password"
+                type="password"
+                class="form-control rounded-0"
+                required
+              />
+            </div>
+            <label class="text-danger" *ngIf="wrongCredentials"
+              >All fields required</label
+            >
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+                name="checkbox"
+                [(ngModel)]="registerUserData.checkbox"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >Wyrażam zgodę na gromadzenie, przetwarzanie i wykorzystywanie
+                moich danych, teraz i w przyszłości, zgodnie z polskim prawem, w
+                szczególności Ustawą o ochronie danych osobowych w celach
+                związanych z założeniem konta użytkownika, zarządzaniem nim oraz
+                świadczeniem usług. Jestem świadomy, że podanie danych jest
+                dobrowolne, mam prawo wglądu do moich danych, ich poprawienia
+                lub usunięcia.</label
+              >
+            </div>
+            <button
+              (click)="registerUser()"
+              type="button"
+              class="btn btn-primary float-right"
+            >
+              Register
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

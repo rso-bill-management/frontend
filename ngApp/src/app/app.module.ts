@@ -30,6 +30,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatListModule } from '@angular/material/list';
     ContractorListComponent,
     InvoiceAddComponent,
     ContractorAddComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,17 @@
+import { environment } from 'src/environments/environment';
+
 export class GlobalConstants {
-  public static apiURL: string = 'http://localhost:1234';
-  public static apiURLRegister: string = 'http://localhost:1234/register';
-  public static apiURLLogin: string = 'http://localhost:1234/login';
-  public static apiURLEvents: string = 'http://localhost:1234/events';
+  public static apiURLRegister: string = environment.apiUrl + '/register';
+  public static apiURLLogin: string = environment.apiUrl + '/login';
+  public static apiURLEvents: string = environment.apiUrl + '/events';
   public static apiURLGetContractorList: string =
-    'http://localhost:1234/contractor-list';
+    environment.apiUrl + '/contractor-list';
   public static apiURLUpsertContractor: string =
-    'http://localhost:1234/upsert-contractor';
+    environment.apiUrl + '/upsert-contractor';
   public static apiURLRemoveContractor: string =
-    'http://localhost:1234/remove-contractor';
+    environment.apiUrl + '/remove-contractor';
+  public static apiURLGetSellerData: string =
+    environment.apiUrl + '/get-seller';
+  public static apiURLUpsertSeller: string =
+    environment.apiUrl + '/upsert-seller';
 }

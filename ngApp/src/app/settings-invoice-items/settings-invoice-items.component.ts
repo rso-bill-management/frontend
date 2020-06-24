@@ -53,12 +53,11 @@ export class SettingsInvoiceItemsComponent implements OnInit {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
-  addInvoiceItem(row: PredefinedInvoiceModel) {
+  addInvoiceItem() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    dialogConfig.data = row;
     const dialogReference = this.matDialog.open(
       SettingsInvoiceItemsAddComponent,
       dialogConfig

@@ -10,9 +10,9 @@ export class InvoiceAddComponent implements OnInit {
 
   public formModel = this.fb.group({
     number: ['', Validators.required],
-    dateIssue: ['', Validators.required],
+    dateIssue: [new Date(), Validators.required],
     placeIssue: ['', Validators.required],
-    saleDate: ['', Validators.required],
+    saleDate: [new Date(), Validators.required],
     contractor: this.fb.group({
       name: ['', Validators.required],
       taxpayerIdentificationNumber: [''],

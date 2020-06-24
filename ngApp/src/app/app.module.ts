@@ -33,6 +33,7 @@ import { MatListModule } from '@angular/material/list';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsInvoiceItemsComponent } from './settings-invoice-items/settings-invoice-items.component';
 import { SettingsInvoiceItemsAddComponent } from './settings-invoice-items-add/settings-invoice-items-add.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -49,28 +50,29 @@ import { SettingsInvoiceItemsAddComponent } from './settings-invoice-items-add/s
     SettingsInvoiceItemsComponent,
     SettingsInvoiceItemsAddComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    MatTableModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatListModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCardModule,
+        MatTableModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatListModule,
+        MatCheckboxModule
+    ],
   providers: [
     AuthService,
     AuthGuard,

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,37 +9,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerUserData = {
-    username: '',
-    password: '',
-    name: '',
-    surname: '',
-    checkbox: false
-  };
+
+
+  registerUserData = this.fb.group({
+    username: ['', Validators.minLength(4)],
+    password: ['', Validators.minLength(6)],
+    name: ['', Validators.minLength(2)],
+    surname: ['', Validators.minLength(2)],
+    rules: [false, Validators.requiredTrue],
+  });
 
   wrongCredentials = false;
-  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
-
-  validateData() {
-    if (
-      this.registerUserData.username === '' ||
-      this.registerUserData.password === '' ||
-      this.registerUserData.name === '' ||
-      this.registerUserData.surname === '' ||
-      this.registerUserData.checkbox === false
-    ) {
-      return false;
-    }
-    return true;
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
   }
 
+  ngOnInit(): void {
+  }
+
+
   registerUser() {
-    this.registerUserData.name = this.registerUserData.name.charAt(0).toUpperCase() + this.registerUserData.name.slice(1);
-    this.registerUserData.surname = this.registerUserData.surname.charAt(0).toUpperCase() + this.registerUserData.surname.slice(1);
-    if (this.validateData()) {
-      this.authService.registerUser(this.registerUserData).subscribe(
+    const formData = this.registerUserData.value;
+    if(!this.registerUserData.valid){
+      return;
+    }
+    formData.name = formData.name.charAt(0).toUpperCase() + formData.name.slice(1);
+    formData.surname = formData.surname.charAt(0).toUpperCase() + formData.surname.slice(1);
+    this.authService.registerUser(formData).subscribe(
         response => {
           console.log(response);
           this.router.navigate(['/invoice-add']);
@@ -46,8 +43,5 @@ export class RegisterComponent implements OnInit {
         },
         error => console.log(error)
       );
-    } else {
-      this.wrongCredentials = true;
-    }
   }
 }

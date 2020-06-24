@@ -39,11 +39,11 @@ export class SettingsInvoiceItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.listData.data = [
-      {
+/*      {
         id: 30,
         count: 10,
         title: 'Sprzedaz czegos tam', unit: 'SZT', vat: 23, unitNettoPrice: 100
-      }
+      }*/
     ];
     this.listData.sort = this.sort;
     this.listData.paginator = this.paginator;

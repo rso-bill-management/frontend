@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PredefinedInvoiceModel} from '../../model/predefined-invoice.model';
+import {InvoiceService} from '../invoice.service';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-invoice-add',
@@ -8,6 +10,8 @@ import {PredefinedInvoiceModel} from '../../model/predefined-invoice.model';
   styleUrls: ['./invoice-add.component.scss']
 })
 export class InvoiceAddComponent implements OnInit {
+
+  private predefinedInvoiceItems: PredefinedInvoiceModel[];
 
   public formModel = this.fb.group({
     number: ['', Validators.required],
@@ -26,11 +30,12 @@ export class InvoiceAddComponent implements OnInit {
     paymentDays: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private iS: InvoiceService) {
   }
 
   ngOnInit(): void {
     this.addNewPosition();
+    this.iS.listPredefinedInvoice().subscribe(e => this.predefinedInvoiceItems = e);
   }
 
   public addNewPosition() {
@@ -98,6 +103,24 @@ export class InvoiceAddComponent implements OnInit {
   }
 
   getFilteredInvoiceItems(value: string): PredefinedInvoiceModel[] {
-    return [];
+    if (!this.predefinedInvoiceItems) {
+      return [];
+    }
+    return this.predefinedInvoiceItems.filter(e => e.title.toLowerCase().includes(value));
+  }
+
+  onTitleOptionSelected($event: MatAutocompleteSelectedEvent, i: number) {
+    const selected = $event.option.value as PredefinedInvoiceModel;
+    const invoiceItems = this.formModel.get('positions') as FormArray;
+    invoiceItems.at(i)
+      .patchValue(
+        {
+          title: selected.title,
+          count: selected.count,
+          unit: selected.unit,
+          netPrice: selected.unitNettoPrice,
+          vat: selected.vat,
+        }, {onlySelf: true});
+    console.log($event, i);
   }
 }

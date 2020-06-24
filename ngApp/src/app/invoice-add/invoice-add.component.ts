@@ -14,7 +14,6 @@ export class InvoiceAddComponent implements OnInit {
   private predefinedInvoiceItems: PredefinedInvoiceModel[];
 
   public formModel = this.fb.group({
-    number: ['', Validators.required],
     dateIssue: [new Date(), Validators.required],
     placeIssue: ['', Validators.required],
     saleDate: [new Date(), Validators.required],
@@ -89,13 +88,13 @@ export class InvoiceAddComponent implements OnInit {
   calcSumVat() {
     return this.positions.controls
       .map((e, index) => this.calcVatAmountForPos(index))
-      .reduce((a, b) => a + b, 0.0);
+      .reduce((a, b) => a + b, 0.0).toFixed(2);
   }
 
   calcSumGross() {
     return this.positions.controls
       .map((e, index) => this.calcGrossAmountForPos(index))
-      .reduce((a, b) => a + b, 0.0);
+      .reduce((a, b) => a + b, 0.0).toFixed(2);
   }
 
   clear() {
@@ -121,6 +120,5 @@ export class InvoiceAddComponent implements OnInit {
           netPrice: selected.unitNettoPrice,
           vat: selected.vat,
         }, {onlySelf: true});
-    console.log($event, i);
   }
 }

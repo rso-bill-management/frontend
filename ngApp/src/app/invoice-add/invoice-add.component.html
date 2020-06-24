@@ -22,7 +22,12 @@
           <div class="col-md-4">
             <mat-form-field class="w-100">
               <mat-label>Issue place</mat-label>
-              <input matInput placeholder="Town" formControlName="placeIssue"/>
+              <input
+                matInput
+                placeholder="Town"
+                formControlName="placeIssue"
+                value="{{ seller.town }}"
+              />
             </mat-form-field>
           </div>
           <div class="col-md-4">
@@ -49,10 +54,15 @@
         <mat-card class="h-100">
           <mat-card-title>Seller</mat-card-title>
           <mat-card-content>
-            <strong>Daniel Bigos Usługi IT</strong><br/>
-            <span>20 2020 20020 2222 2222 2222 PEKAO SA</span><br/>
-            <span>3-maja 30/40</span><br/>
-            <span class="mr-1">09-122</span> <span>Radom</span><br/>
+            <strong>Company Name: {{ seller.companyName }}</strong
+            ><br />
+            <span>Account Number: {{ seller.accountNumber }}</span
+            ><br />
+            <span>Street: {{ seller.street }}</span
+            ><br />
+            <span class="mr-1"> Postal Code: {{ seller.postalCode }}</span>
+            <span>Town: {{ seller.town }}</span
+            ><br />
           </mat-card-content>
         </mat-card>
       </div>
@@ -64,9 +74,18 @@
           <mat-card-subtitle class="mb-1">
             <mat-form-field class="w-80">
               <mat-label>Select contractor</mat-label>
-              <mat-select #contractorSelect (selectionChange)="onSelectPredefinedContractor($event); contractorSelect.value = ''">
-                <mat-option *ngFor="let contractor of predefinedContractors" [value]="contractor">
-                  {{contractor.name}}
+              <mat-select
+                #contractorSelect
+                (selectionChange)="
+                  onSelectPredefinedContractor($event);
+                  contractorSelect.value = ''
+                "
+              >
+                <mat-option
+                  *ngFor="let contractor of predefinedContractors"
+                  [value]="contractor"
+                >
+                  {{ contractor.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -75,7 +94,7 @@
             <div class="row">
               <mat-form-field class="col-12 w-100">
                 <mat-label>Name</mat-label>
-                <input matInput formControlName="name"/>
+                <input matInput formControlName="name" />
               </mat-form-field>
             </div>
             <div class="row">
@@ -90,20 +109,20 @@
             <div class="row">
               <mat-form-field class="col-12 w-100">
                 <mat-label>Street</mat-label>
-                <input matInput formControlName="street"/>
+                <input matInput formControlName="street" />
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="w-100">
                   <mat-label>Zip code</mat-label>
-                  <input matInput formControlName="postalCode"/>
+                  <input matInput formControlName="postalCode" />
                 </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field class="w-100">
                   <mat-label>Town</mat-label>
-                  <input matInput formControlName="town"/>
+                  <input matInput formControlName="town" />
                 </mat-form-field>
               </div>
             </div>
@@ -142,10 +161,23 @@
               <div class="col-md-5">
                 <mat-form-field class="w-100">
                   <mat-label>Title</mat-label>
-                  <input #titleInput matInput formControlName="title" [matAutocomplete]="title"/>
-                  <mat-autocomplete #title="matAutocomplete" (optionSelected)="onTitleOptionSelected($event, i)">
-                    <mat-option *ngFor="let option of getFilteredInvoiceItems(titleInput.value)" [value]="option">
-                      {{option.title}}
+                  <input
+                    #titleInput
+                    matInput
+                    formControlName="title"
+                    [matAutocomplete]="title"
+                  />
+                  <mat-autocomplete
+                    #title="matAutocomplete"
+                    (optionSelected)="onTitleOptionSelected($event, i)"
+                  >
+                    <mat-option
+                      *ngFor="
+                        let option of getFilteredInvoiceItems(titleInput.value)
+                      "
+                      [value]="option"
+                    >
+                      {{ option.title }}
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>

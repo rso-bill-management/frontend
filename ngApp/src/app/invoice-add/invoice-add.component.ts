@@ -6,6 +6,8 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Contractor} from '../../model/contractor.model';
 import {ContractorService} from '../contractor.service';
 import {MatSelectChange} from '@angular/material/select';
+import { SellerService } from '../seller.service';
+import { SellerModel } from 'src/model/seller.model';
 
 @Component({
   selector: 'app-invoice-add',
@@ -16,6 +18,15 @@ export class InvoiceAddComponent implements OnInit {
 
   private predefinedInvoiceItems: PredefinedInvoiceModel[];
   public predefinedContractors: Contractor[] = [];
+
+  public seller: SellerModel = {
+    tin: '',
+    companyName: '',
+    accountNumber: '',
+    town: '',
+    street: '',
+    postalCode: ''
+  };
 
   public formModel = this.fb.group({
     dateIssue: [new Date(), Validators.required],
@@ -33,10 +44,15 @@ export class InvoiceAddComponent implements OnInit {
     paymentDays: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private iS: InvoiceService, private contractorService: ContractorService) {
-  }
+  constructor(private fb: FormBuilder, private iS: InvoiceService, private sellerService: SellerService, private contractorService: ContractorService) {  }
 
   ngOnInit(): void {
+    this.sellerService.getSellerData().subscribe(
+      response =>{
+        this.seller = response
+      }
+      ,error =>{}
+      )
     this.addNewPosition();
     this.iS.listPredefinedInvoice().subscribe(e => this.predefinedInvoiceItems = e);
     this.contractorService.getContractorList().subscribe(e => this.predefinedContractors = e.body || []);

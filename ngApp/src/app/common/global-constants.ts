@@ -12,10 +12,10 @@ export class GlobalConstants {
     environment.apiUrl + '/invoicing/contractors';
   public static apiURLRemoveContractor: string =
     environment.apiUrl + '/remove-contractor';
-  public static apiURLGetSellerData: string =
-    environment.apiUrl + '/get-seller';
-  public static apiURLUpsertSeller: string =
-    environment.apiUrl + '/upsert-seller';
+  public static apiURLSetSeller: string =
+    environment.apiUrl + '/invoicing/set_seller';
+  public static apiURLGetSeller: string =
+    environment.apiUrl + '/invoicing/seller';
 
   public static apiURLAddPredefinedInvoice: string =
     GlobalConstants.apiURLInvoice + '/predefined_items';

@@ -11,13 +11,10 @@ export class SellerService {
   constructor(public httpClient: HttpClient) {}
 
   getSellerData(): Observable<any> {
-    return this.httpClient.get<any>(GlobalConstants.apiURLGetSellerData);
+    return this.httpClient.get<any>(GlobalConstants.apiURLGetSeller);
   }
 
-  upsertSellerData(seller: SellerModel): Observable<any> {
-    return this.httpClient.post<any>(
-      GlobalConstants.apiURLUpsertSeller,
-      seller
-    );
+  submitSellerData(seller: SellerModel): Observable<any> {
+    return this.httpClient.post<any>(GlobalConstants.apiURLSetSeller, seller);
   }
 }

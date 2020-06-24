@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class SettingsComponent implements OnInit {
   constructor(private router: Router, private sellerService: SellerService) {
     this.sellerData = {
+      tin: '',
       companyName: '',
       accountNumber: '',
       town: '',
@@ -25,8 +26,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.sellerService.getSellerData().subscribe(
       response => {
-        //localStorage.setItem('token', response.headers.get('authorization'));
-        // this.sellerData = response;
+        this.sellerData = response;
       },
       error => {
         if (error instanceof HttpErrorResponse) {
@@ -38,9 +38,9 @@ export class SettingsComponent implements OnInit {
     );
   }
 
-  onUpsertSeller() {
+  onSubmitSeller() {
     this.sellerService
-      .upsertSellerData(this.sellerData)
+      .submitSellerData(this.sellerData)
       .subscribe(response => {}, error => {});
   }
 }

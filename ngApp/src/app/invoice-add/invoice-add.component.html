@@ -140,7 +140,12 @@
               <div class="col-md-5">
                 <mat-form-field class="w-100">
                   <mat-label>Title</mat-label>
-                  <input matInput formControlName="title" />
+                  <input #titleInput matInput formControlName="title" [matAutocomplete]="title" />
+                  <mat-autocomplete #title="matAutocomplete">
+                    <mat-option *ngFor="let option of getFilteredInvoiceItems(titleInput.value)" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
                 </mat-form-field>
               </div>
               <div class="col-md-1 px-2">

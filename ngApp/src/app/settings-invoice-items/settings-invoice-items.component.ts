@@ -8,6 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {PredefinedInvoiceModel} from '../../model/predefined-invoice.model';
 import {ContractorAddComponent} from '../contractor-add/contractor-add.component';
 import {SettingsInvoiceItemsAddComponent} from '../settings-invoice-items-add/settings-invoice-items-add.component';
+import {InvoiceService} from '../invoice.service';
 
 @Component({
   selector: 'app-settings-invoice-items',
@@ -19,7 +20,7 @@ export class SettingsInvoiceItemsComponent implements OnInit {
   constructor(
     private router: Router,
     private matDialog: MatDialog,
-    private contractorService: ContractorService
+    private invoiceService: InvoiceService
   ) {
     this.searchKey = '';
   }
@@ -39,14 +40,18 @@ export class SettingsInvoiceItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.listData.data = [
-/*      {
-        id: 30,
-        count: 10,
-        title: 'Sprzedaz czegos tam', unit: 'SZT', vat: 23, unitNettoPrice: 100
-      }*/
+      /*      {
+              id: 30,
+              count: 10,
+              title: 'Sprzedaz czegos tam', unit: 'SZT', vat: 23, unitNettoPrice: 100
+            }*/
     ];
     this.listData.sort = this.sort;
     this.listData.paginator = this.paginator;
+
+    this.invoiceService.listPredefinedInvoice().subscribe(e => {
+      this.listData.data = e;
+    });
   }
 
   applyfilter(): void {

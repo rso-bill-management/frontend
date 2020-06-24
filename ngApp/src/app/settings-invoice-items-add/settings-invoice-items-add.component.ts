@@ -26,14 +26,13 @@ export class SettingsInvoiceItemsAddComponent implements OnInit {
   predefiniedInvoiceModel: PredefinedInvoiceModel;
 
   ngOnInit(): void {
-
   }
 
   onSubmit(): void {
     this.invoiceService
       .addPredefinedInvoice(this.predefiniedInvoiceModel)
       .subscribe(
-        response => this.submitSuccess(response),
+        response => this.submitSuccess(this.predefiniedInvoiceModel),
         error => this.submitError(error)
       );
   }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PredefinedInvoiceModel} from '../../model/predefined-invoice.model';
 
 @Component({
   selector: 'app-invoice-add',
@@ -79,11 +80,13 @@ export class InvoiceAddComponent implements OnInit {
       .map(e => +e.get('netPrice').value)
       .reduce((a, b) => a + b, 0.0);
   }
+
   calcSumVat() {
     return this.positions.controls
       .map((e, index) => this.calcVatAmountForPos(index))
       .reduce((a, b) => a + b, 0.0);
   }
+
   calcSumGross() {
     return this.positions.controls
       .map((e, index) => this.calcGrossAmountForPos(index))
@@ -92,5 +95,9 @@ export class InvoiceAddComponent implements OnInit {
 
   clear() {
     this.formModel.reset();
+  }
+
+  getFilteredInvoiceItems(value: string): PredefinedInvoiceModel[] {
+    return [];
   }
 }

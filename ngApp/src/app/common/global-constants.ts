@@ -7,9 +7,9 @@ export class GlobalConstants {
   public static apiURLInvoice: string = environment.apiUrl + '/invoicing';
 
   public static apiURLGetContractorList: string =
-    environment.apiUrl + '/contractor-list';
+    environment.apiUrl + '/invoicing/contractors';
   public static apiURLUpsertContractor: string =
-    environment.apiUrl + '/upsert-contractor';
+    environment.apiUrl + '/invoicing/contractors';
   public static apiURLRemoveContractor: string =
     environment.apiUrl + '/remove-contractor';
   public static apiURLGetSellerData: string =

@@ -30,63 +30,6 @@ export class ContractorListComponent implements OnInit {
   }
 
   contractors: Contractor[] = [];
-  //   {
-  //     id: '1',
-  //     name: 'Piotr',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Karkow',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Tomek',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Warszawa',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   },
-  //   {
-  //     id: '3',
-  //     name: 'Daniel',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Warszawa',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   },
-  //   {
-  //     id: '4',
-  //     name: 'Marek',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Warszawa',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   },
-  //   {
-  //     id: '5',
-  //     name: 'Arek',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Warszawa',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   },
-  //   {
-  //     id: '6',
-  //     name: 'Jarek',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Warszawa',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   },
-  //   {
-  //     id: '7',
-  //     name: 'Jacek',
-  //     taxpayerIdentificationNumber: '123213123123',
-  //     town: 'Warszawa',
-  //     street: 'warynskiego 12',
-  //     postalCode: '00-631'
-  //   }
-  // ];
 
   displayedColumns = [
     'name',
@@ -105,7 +48,9 @@ export class ContractorListComponent implements OnInit {
   ngOnInit(): void {
     this.contractorService.getContractorList().subscribe(
       response => {
-        this.contractors = response;
+        localStorage.setItem('token', response.headers.get('authorization'));
+
+        this.contractors = response.body.contractors;
         this.listData = new MatTableDataSource(this.contractors);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;

@@ -25,7 +25,8 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.sellerService.getSellerData().subscribe(
       response => {
-        this.sellerData = response;
+        //localStorage.setItem('token', response.headers.get('authorization'));
+        // this.sellerData = response;
       },
       error => {
         if (error instanceof HttpErrorResponse) {

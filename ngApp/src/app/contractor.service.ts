@@ -11,7 +11,9 @@ export class ContractorService {
   constructor(public httpClient: HttpClient) {}
 
   getContractorList(): Observable<any> {
-    return this.httpClient.get<any>(GlobalConstants.apiURLGetContractorList);
+    return this.httpClient.get<any>(GlobalConstants.apiURLGetContractorList, {
+      observe: 'response'
+    });
   }
 
   upsertContractor(contractor: Contractor): Observable<any> {

@@ -113,13 +113,13 @@ export class InvoiceAddComponent implements OnInit {
 
   public calcGrossAmountForPos(pos: number) {
     const position = (this.positions.at(pos)) as FormGroup;
-    return +position.get('unitNettoPrice').value + this.calcVatAmountForPos(pos);
+    return (+position.get('count').value * +position.get('unitNettoPrice').value) + this.calcVatAmountForPos(pos);
   }
 
   calcSumNet() {
     return this.positions.controls
       .map(e => e as FormGroup)
-      .map(e => +e.get('unitNettoPrice').value)
+      .map(e => +e.get('count').value * +e.get('unitNettoPrice').value)
       .reduce((a, b) => a + b, 0.0);
   }
 

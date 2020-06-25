@@ -3,6 +3,8 @@ import { SellerModel } from 'src/model/seller.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SellerService } from '../seller.service';
 import { Router } from '@angular/router';
+import { DialogData } from '../register/register.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  constructor(private router: Router, private sellerService: SellerService) {
+  constructor(
+    private router: Router,
+    private sellerService: SellerService,
+    public dialog: MatDialog
+  ) {
     this.sellerData = {
       tin: '',
       companyName: '',
@@ -39,8 +45,11 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmitSeller() {
-    this.sellerService
-      .submitSellerData(this.sellerData)
-      .subscribe(response => {}, error => {});
+    this.sellerService.submitSellerData(this.sellerData).subscribe(
+      response => {
+        this.dialog.open(DialogData, { data: 'Success!' });
+      },
+      error => {}
+    );
   }
 }

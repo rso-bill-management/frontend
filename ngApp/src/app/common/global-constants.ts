@@ -28,4 +28,7 @@ export class GlobalConstants {
 
   public static apiURLAddInvoice: string =
     GlobalConstants.apiURLInvoice + '/invoices';
+
+  public static apiURLToPdf: string =
+    GlobalConstants.apiURLInvoice + '/invoices';
 }

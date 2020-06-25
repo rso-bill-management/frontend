@@ -1,6 +1,6 @@
-import {InvoicePosition} from './invoice-position.model';
-import {PaymentType} from './payment.type';
-import {Contractor} from './contractor.model';
+import { InvoicePosition } from './invoice-position.model';
+import { PaymentType } from './payment.type';
+import { Contractor } from './contractor.model';
 
 export interface InvoiceModel {
   number: string;
@@ -14,4 +14,5 @@ export interface InvoiceModel {
   grossSum: number; // suma brutto
   paymentType: PaymentType;
   paymentDays: string;
+  uuid: string;
 }

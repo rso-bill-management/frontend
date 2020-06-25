@@ -10,6 +10,7 @@ import {SellerService} from '../seller.service';
 import {SellerModel} from 'src/model/seller.model';
 import {DatePipe} from '@angular/common';
 import {PaymentType} from '../../model/payment.type';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-invoice-add',
@@ -46,7 +47,7 @@ export class InvoiceAddComponent implements OnInit {
     paymentDays: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private iS: InvoiceService, private sellerService: SellerService, private contractorService: ContractorService, @Inject(LOCALE_ID) private _locale: string) {
+  constructor(private route: Router, private fb: FormBuilder, private iS: InvoiceService, private sellerService: SellerService, private contractorService: ContractorService) {
   }
 
   ngOnInit(): void {
@@ -79,8 +80,7 @@ export class InvoiceAddComponent implements OnInit {
       count: ['', Validators.compose([Validators.required, Validators.min(1)])],
       unit: ['', Validators.required],
       unitNettoPrice: ['', Validators.required],
-      vat: ['', Validators.compose([Validators.required, Validators.max(100), Validators.min(0)])],
-      vatAmount: ['', Validators.required],
+      vat: ['', Validators.compose([Validators.required, Validators.max(100), Validators.min(0)])]
     });
   }
 
@@ -89,6 +89,9 @@ export class InvoiceAddComponent implements OnInit {
   }
 
   onSubmit($event: any) {
+    if (!this.formModel.valid) {
+      return;
+    }
     const copy = {
       ...this.formModel.value,
       dateIssue: new DatePipe('en-US').transform(this.formModel.value.dateIssue, 'yyyy-MM-dd'),
@@ -98,7 +101,7 @@ export class InvoiceAddComponent implements OnInit {
       vatSum: Number(this.calcSumVat())
     };
     this.iS.upsertInvoice(copy).subscribe(e => {
-      console.log(e);
+      this.route.navigate(['invoice-list']);
     });
   }
 

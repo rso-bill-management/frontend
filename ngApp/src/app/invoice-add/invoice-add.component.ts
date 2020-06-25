@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PredefinedInvoiceModel} from '../../model/predefined-invoice.model';
 import {InvoiceService} from '../invoice.service';
@@ -6,8 +6,10 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Contractor} from '../../model/contractor.model';
 import {ContractorService} from '../contractor.service';
 import {MatSelectChange} from '@angular/material/select';
-import { SellerService } from '../seller.service';
-import { SellerModel } from 'src/model/seller.model';
+import {SellerService} from '../seller.service';
+import {SellerModel} from 'src/model/seller.model';
+import {DatePipe} from '@angular/common';
+import {PaymentType} from '../../model/payment.type';
 
 @Component({
   selector: 'app-invoice-add',
@@ -34,7 +36,7 @@ export class InvoiceAddComponent implements OnInit {
     saleDate: [new Date(), Validators.required],
     contractor: this.fb.group({
       name: ['', Validators.required],
-      taxpayerIdentificationNumber: [''],
+      tin: [''],
       town: ['', Validators.required],
       street: ['', Validators.required],
       postalCode: ['', Validators.required],
@@ -44,15 +46,17 @@ export class InvoiceAddComponent implements OnInit {
     paymentDays: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private iS: InvoiceService, private sellerService: SellerService, private contractorService: ContractorService) {  }
+  constructor(private fb: FormBuilder, private iS: InvoiceService, private sellerService: SellerService, private contractorService: ContractorService, @Inject(LOCALE_ID) private _locale: string) {
+  }
 
   ngOnInit(): void {
-    this.sellerService.getSellerData().subscribe(
-      response =>{
-        this.seller = response
-      }
-      ,error =>{}
-      )
+    this.sellerService.getSellerData().subscribe(response => {
+      this.seller = response;
+      this.formModel.patchValue({
+        placeIssue: this.seller.town
+      }, {});
+    }, error => {
+    });
     this.addNewPosition();
     this.iS.listPredefinedInvoice().subscribe(e => this.predefinedInvoiceItems = e);
     this.contractorService.getContractorList().subscribe(e => this.predefinedContractors = e.body || []);
@@ -74,7 +78,7 @@ export class InvoiceAddComponent implements OnInit {
       title: ['', Validators.required],
       count: ['', Validators.compose([Validators.required, Validators.min(1)])],
       unit: ['', Validators.required],
-      netPrice: ['', Validators.required],
+      unitNettoPrice: ['', Validators.required],
       vat: ['', Validators.compose([Validators.required, Validators.max(100), Validators.min(0)])],
       vatAmount: ['', Validators.required],
     });
@@ -85,24 +89,34 @@ export class InvoiceAddComponent implements OnInit {
   }
 
   onSubmit($event: any) {
-    console.log(this.formModel.value);
+    const copy = {
+      ...this.formModel.value,
+      dateIssue: new DatePipe('en-US').transform(this.formModel.value.dateIssue, 'yyyy-MM-dd'),
+      saleDate: new DatePipe('en-US').transform(this.formModel.value.saleDate, 'yyyy-MM-dd'),
+      netPriceSum: this.calcSumNet(),
+      grossSum: Number(this.calcSumGross()),
+      vatSum: Number(this.calcSumVat())
+    };
+    this.iS.upsertInvoice(copy).subscribe(e => {
+      console.log(e);
+    });
   }
 
   public calcVatAmountForPos(pos: number) {
     const position = (this.positions.at(pos)) as FormGroup;
-    const val = +position.get('netPrice').value * (+position.get('vat').value / 100.0);
-    return val ?? 0.0;
+    const val = (+position.get('count').value * +position.get('unitNettoPrice').value) * (+position.get('vat').value / 100.0);
+    return Number(val.toFixed(2)) ?? 0.0;
   }
 
   public calcGrossAmountForPos(pos: number) {
     const position = (this.positions.at(pos)) as FormGroup;
-    return +position.get('netPrice').value + this.calcVatAmountForPos(pos);
+    return +position.get('unitNettoPrice').value + this.calcVatAmountForPos(pos);
   }
 
   calcSumNet() {
     return this.positions.controls
       .map(e => e as FormGroup)
-      .map(e => +e.get('netPrice').value)
+      .map(e => +e.get('unitNettoPrice').value)
       .reduce((a, b) => a + b, 0.0);
   }
 
@@ -131,23 +145,22 @@ export class InvoiceAddComponent implements OnInit {
 
   onTitleOptionSelected($event: MatAutocompleteSelectedEvent, i: number) {
     const selected = $event.option.value as PredefinedInvoiceModel;
-    const invoiceItems = this.formModel.get('positions') as FormArray;
-    invoiceItems.at(i)
-      .patchValue(
-        {
-          title: selected.title,
-          count: selected.count,
-          unit: selected.unit,
-          netPrice: selected.unitNettoPrice,
-          vat: selected.vat,
-        }, {onlySelf: true});
+    const position = (this.positions.at(i)) as FormGroup;
+    position.patchValue(
+      {
+        title: selected.title,
+        count: selected.count,
+        unit: selected.unit,
+        unitNettoPrice: selected.unitNettoPrice,
+        vat: selected.vat,
+      });
   }
 
   onSelectPredefinedContractor($event) {
     const selectedContractor = $event.value as Contractor;
     this.formModel.get('contractor').patchValue({
       ...selectedContractor,
-      taxpayerIdentificationNumber: selectedContractor.tin,
+      tin: selectedContractor.tin,
     }, {onlySelf: true});
   }
 }

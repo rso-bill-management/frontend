@@ -25,4 +25,7 @@ export class GlobalConstants {
 
   public static apiURLGetInvoicesList: string =
     GlobalConstants.apiURLInvoice + '/invoices';
+
+  public static apiURLAddInvoice: string =
+    GlobalConstants.apiURLInvoice + '/invoices';
 }

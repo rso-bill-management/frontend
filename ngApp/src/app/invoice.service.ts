@@ -17,10 +17,10 @@ export class InvoiceService {
     return this.httpClient.get<InvoiceModel[]>(GlobalConstants.apiURLGetInvoicesList);
   }
 
-  upsertInvoice(contractor: Contractor): Observable<any> {
+  upsertInvoice(invoiceModel: InvoiceModel): Observable<any> {
     return this.httpClient.post<any>(
-      GlobalConstants.apiURLUpsertContractor,
-      contractor
+      GlobalConstants.apiURLAddInvoice,
+      invoiceModel
     );
   }
 
